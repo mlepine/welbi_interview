@@ -1,24 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
+import { Navbar, Nav } from "react-bootstrap";
+import ProgramsPage from "./pages/programs";
+import ResidentsPage from "./pages/residents";
+import HomePage from "./pages/home";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Navbar bg="light" expand="lg">
+        <Link to="/" className="navbar-brand">
+          Welbi
+        </Link>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="mr-auto">
+            <Link to="/programs" className="nav-link">
+              Programs
+            </Link>
+            <Link to="/residents" className="nav-link">
+              Residents
+            </Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+      <Switch>
+        <Route path="/residents">
+          <ResidentsPage />
+        </Route>
+        <Route path="/programs">
+          <ProgramsPage />
+        </Route>
+        <Route path="/">
+          <HomePage />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 
